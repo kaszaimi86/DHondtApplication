@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vote>
+    <PartiesList>
+        <parties>
+            <leader>Jalapeno Leader</leader>
+            <name>Jalapeno</name>
+            <voteCount>47000</voteCount>
+        </parties>
+        <parties>
+            <leader>Habanero Leader</leader>
+            <name>Habanero</name>
+            <voteCount>25000</voteCount>
+        </parties>
+        <parties>
+            <leader>Red Savina Leader</leader>
+            <name>Red Savina</name>
+            <voteCount>6000</voteCount>
+        </parties>
+        <parties>
+            <leader>Moruga Scorpion Leader</leader>
+            <name>Moruga Scorpion</name>
+            <voteCount>16000</voteCount>
+        </parties>
+        <parties>
+            <leader>Carolina Reaper Leader</leader>
+            <name>Carolina Reaper</name>
+            <voteCount>3100</voteCount>
+        </parties>
+        <parties>
+            <leader>Chipotle Leader</leader>
+            <name>Chipotle</name>
+            <voteCount>15900</voteCount>
+        </parties>
+    </PartiesList>
+    <threshold>2</threshold>
+    <allCount>113000</allCount>
+    <allSeats>10</allSeats>
+</vote>

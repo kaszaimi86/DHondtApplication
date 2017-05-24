@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Ha a scan attribútum értékét "true"-ra módosítjuk, akkor a Logback
+	percenként ellenőrzi, hogy változott-e a konfigurációs állomány.
+	Változás esetén megfelelően igazítja hozzá a beállításokat. Az állomány
+	így akár futásidőben is módosítható.
+-->
+<configuration scan="true" debug="false">
+
+	<!-- A konzolon minden üzenetet naplózunk. -->
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %boldBlue(%.-1level) %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<!--
+		Az állományba csak adott szintű vagy annál magasabb szintű
+		üzeneteket naplózunk (a jelenlegi beállítás esetén ERROR és
+		WARN szintű üzeneteket).
+	-->
+	<appender name="INFO" class="ch.qos.logback.core.FileAppender">
+		<file>LOG/messages.log</file>
+		<append>true</append>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!--
+		Az állományba csak adott szintű üzeneteket naplózunk (a
+		jelenlegi beállítás esetén csak ERROR szintű üzeneteket).
+	-->
+	<appender name="ERROR" class="ch.qos.logback.core.FileAppender">
+		<file>LOG/errors.log</file>
+		<append>true</append>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%d [%class] [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!--
+		Az állományba csak olyan üzeneteket naplózunk, melyeknél az
+		üzenet szövege egy adott karakterláncot tartalmaz.
+	-->
+	<appender name="TEST" class="ch.qos.logback.core.FileAppender">
+		<file>LOG/test.log</file>
+		<append>true</append>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="info" level="INFO" additivity="false">
+        <appender-ref ref="INFO"/>
+    </logger>
+
+    <logger name="error" level="ERROR" additivity="false">
+        <appender-ref ref="ERROR"/>
+    </logger>
+
+    <logger name="tests" level="DEBUG" additivity="false">
+        <appender-ref ref="TEST"/>
+    </logger>
+
+	<!--
+		A gyökér logger mindent naplóz (a konzolra és az állományokba
+		is).
+	-->
+	<root level="ALL">
+		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="INFO"/>
+		<appender-ref ref="ERROR"/>
+		<appender-ref ref="TEST"/>
+	</root>
+
+	<!--
+		Az alábbi logger mindent a konzolra naplóz.
+
+		Az additivity="false" azt jelenti, hogy a logger-be
+		naplózott üzenetek nem adódnak tovább a hierarchiában
+		fölötte lévő logger objektumokhoz. Az attribútum értékét
+		"true"-ra kell módosítani ahhoz, hogy az üzenetek
+		eljussanak a gyökér logger-hez, így az állományokban is
+		megjelenjenek.
+	-->
+
+	<logger name="pkg.Main" level="ALL" additivity="false">
+		<appender-ref ref="STDOUT"/>
+
+	</logger>
+
+
+</configuration>
