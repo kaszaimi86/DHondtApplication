@@ -41,7 +41,7 @@ public class PieChartCreator implements ChartCreator {
 	 * @see controller.ChartCreator#createChart(java.util.HashMap, model.Vote)
 	 *
 	 */
-	//@Override
+
 	public Chart createChart(HashMap <String,Integer> map, Vote vote) {
 
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();

@@ -1,8 +1,3 @@
-/**
- * Test class to test the functionality of MandateCalculatorImpl class {@link controller.MandateCalculatorImpl}.
- */
-
-
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -10,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-//import org.apache.log4j.Logger;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,31 +25,25 @@ import model.Vote;
  */
 public class MandateCalculatorImplTest {
 
-	//private static Logger testInfoLogger = Logger.getLogger("testInfoLogger");
 	private static Logger logger = LoggerFactory.getLogger("test");
 
 	private MandateCalculatorImpl calc;
 	private Vote testVote;
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		logger.debug("****************************************");
 		logger.debug("MandateCalculator test has been started.");
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		logger.debug("MandateCalculator test has been finished.");
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@Before
 	public void setUp() throws Exception {
 		calc = new MandateCalculatorImpl();
@@ -75,21 +64,14 @@ public class MandateCalculatorImplTest {
 		testParties.add(party6);
 
 		testVote = new Vote(testParties,5,100000,10);
-
-
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@After
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * This method will test the normal behavior when all the input datas are correct. Should provide {@code true} result.
-	 * Test method for {@link controller.MandateCalculatorImpl#calculator(model.Vote)}.
-	 */
+
 	@Test
 	public void testCalculator() {
 		MandateForVote testMfV = calc.calculator(testVote);
@@ -112,11 +94,7 @@ public class MandateCalculatorImplTest {
 
 	}
 
-	/**
-	 * This method should provide {@code false} result. One of the parties are not reaching threshold.
-	 * The party: Browns has only 3,1% of the total votes so it should not be in the result because threshold is 5% in this test.
-	 * Test method for {@link controller.MandateCalculatorImpl#calculator(model.Vote)}.
-	 */
+
 	@Test
 	public void testCalculatorFalse() {
 		MandateForVote testMfV = calc.calculator(testVote);
@@ -140,12 +118,7 @@ public class MandateCalculatorImplTest {
 
 	}
 
-	/**
-	 * In this test the threshold is 5%.
-	 * The party: Greens has only 4,9% of the total votes so it should not be in the result because threshold is 5% in this test.
-	 * The party: Red has enough % of the total votes (5%). However this party will get 0 mandates.
-	 * Test method for {@link controller.MandateCalculatorImpl#calculator(model.Vote)}.
-	 */
+
 	@Test
 	public void testCalculatorExact() {
 		Party party1 = new Party("Yellows","Yellow Leader",501);
@@ -181,10 +154,7 @@ public class MandateCalculatorImplTest {
 
 	}
 
-	/**
-	 * Test method should provide the expected result for correct input datas.
-	 * Test method for {@link controller.MandateCalculatorImpl#maxKey(java.util.HashMap)}.
-	 */
+
 	@Test
 	public void testMaxKey() {
 		HashMap<String,Integer> testMap = new HashMap<String,Integer> ();
@@ -194,10 +164,7 @@ public class MandateCalculatorImplTest {
 		assertEquals("Max",calc.maxKey(testMap));
 		logger.debug("maxKey has successfully been tested.");
 	}
-	/**
-	 * Test method which tests that NOT the wrong result is provided by the tested method.
-	 * Test method for {@link controller.MandateCalculatorImpl#maxKey(java.util.HashMap)}.
-	 */
+
 	@Test
 	public void testMaxKeyFalse() {
 		HashMap<String,Integer> testMap = new HashMap<String,Integer> ();

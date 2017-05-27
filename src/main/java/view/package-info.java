@@ -1,6 +1,6 @@
 
 /**
- * The package {@code view} contains all the necessary controllers to create a graphical interface for the user.
+ * The {@code view} package contains all the necessary controllers to create a graphical interface for the user.
  *
  * @author ikasza
  *

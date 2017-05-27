@@ -140,7 +140,8 @@ public class Main extends Application {
 	        dialogStage.show();
 
 
-	    } catch (IOException e) {
+	    } catch (Exception e) {
+	    	errorLogger.error("Error happened during showPieChartStatistics in "+Main.class.toString());
 	    	errorLogger.error(e.getMessage());
 	    }
 	}
@@ -169,7 +170,8 @@ public class Main extends Application {
 	        dialogStage.setScene(scene);
 	        dialogStage.show();
 
-	    } catch (IOException e) {
+	    } catch (Exception e) {
+	    	errorLogger.error("Error happened during showBarChartStatistics in "+Main.class.toString());
 	    	errorLogger.error(e.getMessage());
 	    }
 	}

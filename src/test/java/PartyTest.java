@@ -1,5 +1,5 @@
 /**
- *
+ *@author ikasza
  */
 
 
@@ -16,52 +16,34 @@ import org.slf4j.LoggerFactory;
 
 import model.Party;
 
-/**
- * @author ikasza
- *
- */
+
 public class PartyTest {
 	private Party testParty;
-	//private static Logger testInfoLogger = Logger.getLogger("testInfoLogger");
+
 	private static Logger logger = LoggerFactory.getLogger("test");
 
-
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		logger.debug("****************************");
 		logger.debug("Party test has been started.");
-
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		logger.debug("Party test has been finished.");
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@Before
 	public void setUp() throws Exception {
 		testParty = new Party("TestParty","TestLeader",100);
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@After
 	public void tearDown() throws Exception {
 	}
 
-
-	/**
-	 * Test method for {@link model.Party#getName()}.
-	 */
 	@Test
 	public void testGetName() {
 		String name = testParty.getName();
@@ -69,9 +51,7 @@ public class PartyTest {
 		logger.debug("getName has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Party#setName(java.lang.String)}.
-	 */
+
 	@Test
 	public void testSetName() {
 		testParty.setName("ModifiedName");
@@ -79,9 +59,7 @@ public class PartyTest {
 		logger.debug("setName has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Party#getLeader()}.
-	 */
+
 	@Test
 	public void testGetLeader() {
 		String leader = testParty.getLeader();
@@ -89,9 +67,7 @@ public class PartyTest {
 		logger.debug("getLeader has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Party#setLeader(java.lang.String)}.
-	 */
+
 	@Test
 	public void testSetLeader() {
 		testParty.setLeader("ModifiedLeader");
@@ -99,9 +75,7 @@ public class PartyTest {
 		logger.debug("setLeader has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Party#getVoteCount()}.
-	 */
+
 	@Test
 	public void testGetVoteCount() {
 		int votes = testParty.getVoteCount();
@@ -109,9 +83,7 @@ public class PartyTest {
 		logger.debug("getVoteCount has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Party#setVoteCount(int)}.
-	 */
+
 	@Test
 	public void testSetVoteCount() {
 		testParty.setVoteCount(101);
@@ -119,9 +91,7 @@ public class PartyTest {
 		logger.debug("setVoteCount has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Party#equals(Party)}.
-	 */
+
 	@Test
 	public void testEquals() {
 		Party testParty2 = new Party("TestParty","TestLeader",100);
@@ -130,9 +100,42 @@ public class PartyTest {
 		logger.debug("equals has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Party#Party()}.
-	 */
+
+	@Test
+	public void testEqualsFalse() {
+		Party testParty2 = new Party("TestFalseParty","TestLeader",100);
+
+		assertFalse(testParty.equals(testParty2));
+		logger.debug("equalsFalse has been successfully tested.");
+	}
+
+
+	@Test
+	public void testEqualsFalse2() {
+		Party testParty2 = new Party("TestParty","TestFalseLeader",100);
+
+		assertFalse(testParty.equals(testParty2));
+		logger.debug("equalsFalse has been successfully tested.");
+	}
+
+
+	@Test
+	public void testEqualsFalse3() {
+		Party testParty2 = new Party("TestParty","TestLeader",101);
+
+		assertFalse(testParty.equals(testParty2));
+		logger.debug("equalsFalse has been successfully tested.");
+	}
+
+	@Test
+	public void testEqualsAllFalse() {
+		Party testParty2 = new Party("TestFalseParty","TestFalseLeader",101);
+
+		assertFalse(testParty.equals(testParty2));
+		logger.debug("equalsFalse has been successfully tested.");
+	}
+
+
 	@Test
 	public void testParty() {
 		Party testParty = new Party();

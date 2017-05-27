@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-	Ha a scan attribútum értékét "true"-ra módosítjuk, akkor a Logback
-	percenként ellenőrzi, hogy változott-e a konfigurációs állomány.
-	Változás esetén megfelelően igazítja hozzá a beállításokat. Az állomány
-	így akár futásidőben is módosítható.
--->
+
 <configuration scan="true" debug="false">
 
 	<!-- A konzolon minden üzenetet naplózunk. -->
@@ -16,11 +11,7 @@
 	</appender>
 
 
-	<!--
-		Az állományba csak adott szintű vagy annál magasabb szintű
-		üzeneteket naplózunk (a jelenlegi beállítás esetén ERROR és
-		WARN szintű üzeneteket).
-	-->
+	
 	<appender name="INFO" class="ch.qos.logback.core.FileAppender">
 		<file>LOG/messages.log</file>
 		<append>true</append>
@@ -32,10 +23,7 @@
 		</encoder>
 	</appender>
 
-	<!--
-		Az állományba csak adott szintű üzeneteket naplózunk (a
-		jelenlegi beállítás esetén csak ERROR szintű üzeneteket).
-	-->
+	
 	<appender name="ERROR" class="ch.qos.logback.core.FileAppender">
 		<file>LOG/errors.log</file>
 		<append>true</append>
@@ -49,10 +37,7 @@
 		</encoder>
 	</appender>
 
-	<!--
-		Az állományba csak olyan üzeneteket naplózunk, melyeknél az
-		üzenet szövege egy adott karakterláncot tartalmaz.
-	-->
+	
 	<appender name="TEST" class="ch.qos.logback.core.FileAppender">
 		<file>LOG/test.log</file>
 		<append>true</append>

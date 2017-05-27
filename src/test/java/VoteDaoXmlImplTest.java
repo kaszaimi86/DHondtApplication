@@ -1,7 +1,3 @@
-/**
- *
- */
-
 
 import static org.junit.Assert.*;
 import java.io.File;
@@ -20,12 +16,9 @@ import org.slf4j.LoggerFactory;
 import model.Vote;
 import model.VoteDaoXmlImpl;
 
-/**
- * @author ikasza
- *
- */
+
 public class VoteDaoXmlImplTest {
-	//http://howtodoinjava.com/junit/junit-creating-temporary-filefolder-using-temporaryfolder-rule/
+
 	private static Logger logger = LoggerFactory.getLogger("test");
 
 	@Rule
@@ -35,50 +28,40 @@ public class VoteDaoXmlImplTest {
 	VoteDaoXmlImpl xmlreaderWriter = new VoteDaoXmlImpl();
 
 	String inputFileName = "test.xml";
-	String outputFileName ="testOutput.xml";
+	String inputJAXBErrorFileName = "bad_jaxberror_test.xml";
+	String inputNotValidFileName= "bad_invalid_input.xml";
+
 
 	ClassLoader classLoader = getClass().getClassLoader();
 	File testInputFile = new File(classLoader.getResource(inputFileName).getFile());
-	//File testOutputFile = new File(classLoader.getResource(outputFileName).getFile());
+	File testInputJAXBErrorFile = new File(classLoader.getResource(inputJAXBErrorFileName).getFile());
+	File testInputNotValidErrorFile = new File(classLoader.getResource(inputNotValidFileName).getFile());
 
-
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		logger.debug("*************************************");
 		logger.debug("VoteDaoXmlImpl test has been started.");
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		logger.debug("VoteDaoXmlImpl test has been finished.");
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@After
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * Test method for {@link model.VoteDaoXmlImpl#saveVote(model.Vote, java.io.File)}.
-	 */
 	@Test
-	public final void testSaveVote() {
+	public final void testSaveVote() throws IOException {
 
-		File testOutputFile = new File(outputFileName);
+		File testOutputFile = tempOutFolder.newFile("testOutput.xml");
 
 		Vote outputVote = xmlreaderWriter.loadVote(testInputFile);
 		xmlreaderWriter.saveVote(outputVote,testOutputFile);
@@ -90,9 +73,7 @@ public class VoteDaoXmlImplTest {
 
 	}
 
-	/**
-	 * Test method for {@link model.VoteDaoXmlImpl#loadVote(java.io.File)}.
-	 */
+
 	@Test
 	public final void testLoadVote() {
 
@@ -102,15 +83,26 @@ public class VoteDaoXmlImplTest {
 
 	}
 
-	/**
-	 * Test method for {@link model.VoteDaoXmlImpl#VoteDaoXmlImpl()}.
-	 */
+	@Test(expected=NullPointerException.class)
+	public final void testLoadVoteJAXBError() {
+		vote = xmlreaderWriter.loadVote(testInputJAXBErrorFile);
+		assertNull(vote.toString());
+		logger.debug("testLoadVoteJAXBError has been successfully tested.");
+	}
+
+	@Test
+	public final void testLoadVoteInputError() {
+		vote = xmlreaderWriter.loadVote(testInputNotValidErrorFile);
+		assertNotNull(vote.toString());
+		logger.debug("testLoadVoteJAXBError has been successfully tested.");
+	}
+
+
 	@Test
 	public final void testVoteDaoXmlImpl() {
 		VoteDaoXmlImpl test = new VoteDaoXmlImpl();
 		assertNotNull(test);
 		logger.debug("testVoteDaoXmlImpl has been successfully tested.");
-
 	}
 
 }

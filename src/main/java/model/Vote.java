@@ -145,13 +145,23 @@ public class Vote {
 		boolean result = false;
 
 		if(this.threshold == v.getThreshold() && this.allCount == v.getAllCount() && this.allSeats == v.getAllSeats()){
+
 			List<Party> thisParties = new ArrayList<Party>(this.getParties());
 			List<Party> paramParties = new ArrayList<Party>(v.getParties());
 
 			Collections.sort(thisParties, new PartyComparator());
 			Collections.sort(paramParties, new PartyComparator());
 
-			result = thisParties.equals(paramParties);
+
+			for(int i = 0; i < thisParties.size(); i++){
+				if(  (thisParties.get(i).getName().equals(paramParties.get(i).getName()))  && (thisParties.get(i).getLeader().equals(paramParties.get(i).getLeader()))  && (thisParties.get(i).getVoteCount() == paramParties.get(i).getVoteCount()) ){
+					result=true;
+				}
+				else{
+					result=false;
+				}
+			}
+
 		}
 
 		return result;

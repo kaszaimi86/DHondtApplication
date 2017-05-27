@@ -1,12 +1,8 @@
-/**
- * Test class to test the functionality of MandateForVote class {@link model.MandateForVote}.
- */
-
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
 
-//import org.apache.log4j.Logger;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -22,12 +18,13 @@ public class MandateForVoteTest {
 	private MandateForVote testMFV;
 	private HashMap<String,Integer> testMandates = new HashMap<String,Integer>();
 
-	//private static Logger testInfoLogger = Logger.getLogger("testInfoLogger");
+
 	private static Logger logger = LoggerFactory.getLogger("test");
 
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		logger.debug("*************************************");
 		logger.debug("MandateForVote test has been started.");
 	}
 

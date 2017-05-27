@@ -10,15 +10,42 @@
   		<developers>
 	  		<developer>
 	  			<id>RAU39M</id>
-	  			<name>Kasza Imre</name>
+	  			<name>Imre Kasza</name>
 	  			<email>kaszaimi86@gmail.com</email>
 	  			<organization>University of Debrecen, Faculty of Informatics</organization>
 	  			<organizationUrl>http://www.inf.unideb.hu/</organizationUrl>
 	            <roles>
-	                <role>developer</role>
+	                <role>Developer</role>
 	            </roles>
-	  		</developer>
+	        </developer>
   		</developers>
+
+  		<licenses>
+			  <license>
+			    <name>Apache License, Version 2.0</name>
+			    <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			    <distribution>repo</distribution>
+			    <comments>A business-friendly OSS license</comments>
+			  </license>
+		</licenses>
+
+  		<inceptionYear>2017</inceptionYear>
+
+  		<organization>
+		    <name>University of Debrecen, Faculty of Informatics</name>
+		    <url>http://www.inf.unideb.hu/</url>
+		</organization>
+
+  		<issueManagement>
+			<url>https://github.com/kaszaimi86/DHondtApplication/issues</url>
+			<system>GitHub Issues</system>
+		</issueManagement>
+
+		<scm>
+			<url>https://github.com/kaszaimi86/DHondtApplication</url>
+			<connection>scm:git:git://github.com/kaszaimi86/DHondtApplication.git</connection>
+			<developerConnection>scm:git:git@github.com:kaszaimi86/DHondtApplication.git</developerConnection>
+		</scm>
 
   		<dependencies>
 			<dependency>
@@ -67,7 +94,12 @@
 				<scope>runtime</scope>
 			</dependency>
 
-
+			<dependency>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-surefire-report-plugin</artifactId>
+				  <version>2.20</version>
+				  <type>maven-plugin</type>
+			</dependency>
 
 		</dependencies>
 
@@ -163,9 +195,6 @@
 					  </executions>
 				</plugin>
 
-
-
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 			        <artifactId>maven-enforcer-plugin</artifactId>
@@ -186,13 +215,18 @@
 			          </execution>
 			        </executions>
 				</plugin>
-
-
 			</plugins>
 		</build>
 
      	<reporting>
 		  	<plugins>
+
+			    <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-surefire-report-plugin</artifactId>
+			        <version>2.20</version>
+			    </plugin>
+
 		  		<plugin>
 		  			<groupId>org.apache.maven.plugins</groupId>
 		  			<artifactId>maven-javadoc-plugin</artifactId>
@@ -204,7 +238,7 @@
 		  			<artifactId>maven-checkstyle-plugin</artifactId>
 		  			<version>2.17</version>
 		  			<configuration>
-		  				<configLocation>checkstyle.xml</configLocation>
+		  				<configLocation>src/main/resources/checkstyle.xml</configLocation>
 		  			</configuration>
 		  		</plugin>
 

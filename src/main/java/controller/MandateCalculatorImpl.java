@@ -18,6 +18,9 @@ import model.Party;
  */
 public class MandateCalculatorImpl implements MandateCalculator {
 
+	/**
+	 * Info Logger for this class.
+	 */
 	private static Logger infoLogger = LoggerFactory.getLogger("info");
 
 
@@ -41,12 +44,8 @@ public class MandateCalculatorImpl implements MandateCalculator {
      * @return resMandate A MandateForVote instance which contains the calculated mandates for each party.
 	 * @see controller.MandateCalculator#calculator(model.Vote)
 	 */
-	//@Override
+
 	public MandateForVote calculator(Vote vote) {
-
-		//Logger calculatorInfoLogger = Logger.getLogger("infoLogger");
-		//Logger calculatorErrorLogger = Logger.getLogger("errorLogger");
-
 
 		MandateForVote resMandate;
 		HashMap<String,Integer> partyNameAndVotesOriginal = new HashMap<String,Integer>();

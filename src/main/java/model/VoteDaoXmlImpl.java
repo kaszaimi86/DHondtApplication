@@ -19,11 +19,15 @@ import org.slf4j.LoggerFactory;
  */
 public class VoteDaoXmlImpl implements VoteDAO {
 
-
+	/**
+	 * Info Logger for this class.
+	 */
 	private static Logger infoLogger = LoggerFactory.getLogger("info");
+	/**
+	 * Error logger for this class.
+	 */
 	private static Logger errorLogger = LoggerFactory.getLogger("error");
-	//Logger VoteDaoXmlImplInfoLogger = Logger.getLogger("infoLogger");
-	//Logger VoteDaoXmlImplErrorLogger = Logger.getLogger("errorLogger");
+
 
 
 	/**
@@ -32,7 +36,6 @@ public class VoteDaoXmlImpl implements VoteDAO {
 	 * @param file The given vote should be saved into this file.
 	 * @see model.VoteDAO#saveVote(model.Vote, java.io.File)
 	 */
-	//@Override
 	public void saveVote(Vote vote, File file) {
 
 		JAXBContext context;
@@ -59,7 +62,6 @@ public class VoteDaoXmlImpl implements VoteDAO {
 	 * @return vote The method will give back a vote which is loaded from the given file.
 	 * @see model.VoteDAO#loadVote(java.io.File)
 	 */
-	//@Override
 	public Vote loadVote(File file) {
 		Vote vote = new Vote();
 		try {
@@ -67,12 +69,14 @@ public class VoteDaoXmlImpl implements VoteDAO {
 			Unmarshaller um = context.createUnmarshaller();
 			vote = (Vote) um.unmarshal(file);
 			infoLogger.info("Successfully load from file: "+file.getAbsolutePath());
+			return vote;
 		} catch (JAXBException e) {
 			errorLogger.error("Unsuccessfully read attempt from file.");
 			errorLogger.error("JAXB Error at file read.");
 			errorLogger.error(e.getMessage());
 		}
-		return vote;
+		//return vote;
+		return null;
 	}
 
 	/**

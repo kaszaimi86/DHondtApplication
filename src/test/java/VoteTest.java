@@ -34,29 +34,24 @@ public class VoteTest {
 	private int threshold =2;
 	private int votes = 600;
 	private int seats = 10;
-	//private static Logger testInfoLogger = Logger.getLogger("testInfoLogger");
+
 
 	private static Logger logger = LoggerFactory.getLogger("test");
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		logger.debug("***************************");
 		logger.debug("Vote test has been started.");
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		logger.debug("Vote test has been finished.");
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@Before
 	public void setUp() throws Exception {
 
@@ -67,16 +62,12 @@ public class VoteTest {
 
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+
 	@After
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * Test method for {@link model.Vote#getParties()}.
-	 */
+
 	@Test
 	public void testGetParties() {
 		ArrayList<Party> testPartyList =testVote.getParties();
@@ -84,9 +75,7 @@ public class VoteTest {
 		logger.debug("getParties has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Vote#setParties(java.util.ArrayList)}.
-	 */
+
 	@Test
 	public void testSetParties() {
 		ArrayList<Party> testInputPartyList = new ArrayList<Party> ();
@@ -106,18 +95,14 @@ public class VoteTest {
 		logger.debug("setParties has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Vote#getThreshold()}.
-	 */
+
 	@Test
 	public void testGetThreshold() {
 		assertEquals(2,testVote.getThreshold());
 		logger.debug("getThreshold has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Vote#setThreshold(int)}.
-	 */
+
 	@Test
 	public void testSetThreshold() {
 		testVote.setThreshold(15);
@@ -125,18 +110,14 @@ public class VoteTest {
 		logger.debug("setThreshold has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Vote#getAllCount()}.
-	 */
+
 	@Test
 	public void testGetAllCount() {
 		assertEquals(600,testVote.getAllCount());
 		logger.debug("getAllCount has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Vote#setAllCount(int)}.
-	 */
+
 	@Test
 	public void testSetAllCount() {
 		testVote.setAllCount(300);
@@ -144,18 +125,14 @@ public class VoteTest {
 		logger.debug("setAllCount has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Vote#getAllSeats()}.
-	 */
+
 	@Test
 	public void testGetAllSeats() {
 		assertEquals(10,testVote.getAllSeats());
 		logger.debug("getAllSeats has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Vote#setAllSeats(int)}.
-	 */
+
 	@Test
 	public void testSetAllSeats() {
 		testVote.setAllSeats(358);
@@ -163,9 +140,7 @@ public class VoteTest {
 		logger.debug("setAllSeats has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Vote#Vote(java.util.ArrayList, int, int, int)}.
-	 */
+
 	@Test
 	public void testVoteArrayListOfPartyIntIntInt() {
 		Vote testVoteEqual = new Vote (parties,threshold,votes,seats);
@@ -174,9 +149,7 @@ public class VoteTest {
 
 	}
 
-	/**
-	 * Test method for {@link model.Vote#toString()}.
-	 */
+
 	@Test
 	public void testToString() {
 		String testString = "Vote [party=[Datas of the party [name=TestParty1, leader=TestLeader1, voteCount=100], Datas of the party [name=TestParty2, leader=TestLeader2, voteCount=200], Datas of the party [name=TestParty3, leader=TestLeader3, voteCount=300]], threshold=2, allCount=600, seats=10]";
@@ -184,13 +157,98 @@ public class VoteTest {
 		logger.debug("toString has been successfully tested.");
 	}
 
-	/**
-	 * Test method for {@link model.Vote#Vote()}.
-	 */
+
 	@Test
 	public void testVote() {
 		Vote testVote= new Vote();
 		assertNotNull(testVote);
+		logger.debug("Vote has been successfully tested.");
+	}
+
+	@Test
+	public void testEquals() {
+		Vote test2Vote= new Vote();
+		Party test2Party1 = new Party("TestParty1","TestLeader1",100);
+		Party test2Party2 = new Party("TestParty2","TestLeader2",200);
+		Party test2Party3 = new Party("TestParty3","TestLeader3",300);
+		ArrayList<Party> parties2 = new ArrayList<Party>();
+		int threshold2 =2;
+		int votes2 = 600;
+		int seats2 = 10;
+
+		parties2.add(test2Party1);
+		parties2.add(test2Party2);
+		parties2.add(test2Party3);
+
+		test2Vote = new Vote(parties2,threshold2,votes2,seats2);
+
+		assertTrue(testVote.equals(test2Vote));
+
+
+		logger.debug("Vote has been successfully tested.");
+	}
+
+
+	@Test
+	public void testEqualsFalse() {
+		Vote test2Vote= new Vote();
+		Party test2Party1 = new Party("TestParty1","TestLeader1",100);
+		Party test2Party2 = new Party("TestParty2","TestLeader2",200);
+		Party test2Party3 = new Party("TestParty3","TestLeader3",300);
+		ArrayList<Party> parties2 = new ArrayList<Party>();
+		int threshold2 =6;
+		int votes2 = 601;
+		int seats2 = 10;
+
+		parties2.add(test2Party1);
+		parties2.add(test2Party2);
+		parties2.add(test2Party3);
+
+		test2Vote = new Vote(parties2,threshold2,votes2,seats2);
+		assertFalse(testVote.equals(test2Vote));
+		logger.debug("Vote has been successfully tested.");
+	}
+
+
+	@Test
+	public void testEqualsFalse2() {
+		Vote test2Vote= new Vote();
+		Party test2Party1 = new Party("TestParty1","TestLeader1",101);
+		Party test2Party2 = new Party("TestParty2","TestLeader2",201);
+		Party test2Party3 = new Party("TestParty3","TestLeader3",301);
+		ArrayList<Party> parties2 = new ArrayList<Party>();
+		int threshold2 =2;
+		int votes2 = 600;
+		int seats2 = 10;
+
+		parties2.add(test2Party1);
+		parties2.add(test2Party2);
+		parties2.add(test2Party3);
+
+		test2Vote = new Vote(parties2,threshold2,votes2,seats2);
+		assertFalse(testVote.equals(test2Vote));
+		logger.debug("Vote has been successfully tested.");
+	}
+
+
+	@Test
+	public void testEqualsFalse3() {
+		Vote test2Vote= new Vote();
+		Party test2Party1 = new Party("TestParty1","TestLeader1",100);
+		Party test2Party2 = new Party("TestParty2","TestLeader2",200);
+		Party test2Party3 = new Party("TestParty3","TestLeader3",300);
+		ArrayList<Party> parties2 = new ArrayList<Party>();
+		int threshold2 =56;
+		int votes2 = 603;
+		int seats2 = 10234;
+
+		parties2.add(test2Party1);
+		parties2.add(test2Party2);
+		parties2.add(test2Party3);
+
+		test2Vote = new Vote(parties2,threshold2,votes2,seats2);
+
+		assertFalse(testVote.equals(test2Vote));
 		logger.debug("Vote has been successfully tested.");
 	}
 

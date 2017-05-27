@@ -33,6 +33,7 @@ import controller.VoteDataValidator;
  * @author ikasza
  *
  */
+@SuppressWarnings("unchecked")
 public class VoteController {
 
 	/**
@@ -114,6 +115,9 @@ public class VoteController {
 	 * Info logger for this class.
 	 */
 	private static Logger infoLogger = LoggerFactory.getLogger("info");
+	/**
+	 * Error logger for this class.
+	 */
 	private static Logger errorLogger = LoggerFactory.getLogger("error");
 
 	/**
@@ -200,16 +204,12 @@ public class VoteController {
 
 		if (isInputValid()) {
 			Vote vote = createVote();
-
-
 			FileChooser fileChooser = new FileChooser();
 
-	        // Set extension filter
 	        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
 	                "XML files (*.xml)", "*.xml");
 	        fileChooser.getExtensionFilters().add(extFilter);
 
-	        // Show save file dialog
 	        File file = fileChooser.showSaveDialog(main.getPrimaryStage());
 
 	        if (file != null) {
@@ -232,15 +232,11 @@ public class VoteController {
 		try{
 			FileChooser fileChooserLoad = new FileChooser();
 
-			// Set extension filter
 			FileChooser.ExtensionFilter extFilterLoad = new FileChooser.ExtensionFilter(
                 "XML files (*.xml)", "*.xml");
 			fileChooserLoad.getExtensionFilters().add(extFilterLoad);
 
-			// Show open file dialog
 			File file = fileChooserLoad.showOpenDialog(main.getPrimaryStage());
-
-			//if (file != null)
 
 			try {
 				Vote vote = xmlReaderWriter.loadVote(file);
@@ -285,13 +281,13 @@ public class VoteController {
 	        	thresholdField.setText(Integer.toString(vote.getThreshold()));
 	    		mandatesField.setText(Integer.toString(vote.getAllSeats()));
 	    	}catch(Exception e){
-	    		errorLogger.error("No file has been chosen.");
+	    		errorLogger.error("No file has been chosen or file is invalid.");
 	    		errorLogger.error(e.getMessage());
 	        	Alert alert = new Alert(AlertType.ERROR);
 	    		alert.initOwner(main.getPrimaryStage());
-	    		alert.setTitle("No file has been choosen.");
+	    		alert.setTitle("No file has been chosen or file is invalid.");
 	    		alert.setHeaderText("Faulty datas.");
-	    		alert.setContentText("Please check the file you chose. No file has been choosen.");
+	    		alert.setContentText("Please check the file you chose. No file has been chosen or file is invalid.");
 	    		alert.showAndWait();
 	    	}
 
@@ -332,8 +328,6 @@ public class VoteController {
 
 			HashMap<String, Integer> mandates = mandate.getMandates();
 
-
-
 			if(chartType.equalsIgnoreCase("PIECHART")){
 				ChartCreator pieChartCreator = chartFactory.getChartCreator("PIECHART");
 				resultChart = (PieChart) pieChartCreator.createChart(mandates,vote);
@@ -347,11 +341,11 @@ public class VoteController {
 			}
 
 		}else{
+			resultChart = null; //new PieChart();
 
-			resultChart = new PieChart();
-
-			XYChart.Series <String, Number> barChartSeries = new XYChart.Series<String,Number>();
-	    	barChart.setData(FXCollections.observableArrayList(barChartSeries));
+//			XYChart.Series <String, Number> barChartSeries = new XYChart.Series<String,Number>();
+//	    	barChart.setData(FXCollections.observableArrayList(barChartSeries));
+			barChart=null;
 
 			errorLogger.error("Cannot create chart.");
     		errorLogger.error("Faulty datas.");

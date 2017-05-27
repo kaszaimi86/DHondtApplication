@@ -20,15 +20,6 @@ import model.Vote;
 public class BarChartCreator implements ChartCreator {
 
 
-	/**
-	 * X axis for the bar chart. Represents the parties.
-	 */
-	private CategoryAxis xAxis =new CategoryAxis();
-    /**
-     * Y axis for the bar chart. Represents the number of votes of each party.
-     */
-    private NumberAxis yAxis = new NumberAxis();
-
     /**
 	 * Temporary variable for Party names.
 	 */
@@ -48,11 +39,17 @@ public class BarChartCreator implements ChartCreator {
 	 * @return barChart The created barchart.
 	 * @see controller.ChartCreator#createChart(java.util.HashMap, model.Vote)
 	 */
-	//@Override
+
 	public Chart createChart(HashMap <String,Integer> map, Vote vote) {
 
-		xAxis.setLabel("Parties");
-		yAxis.setLabel("Mandates");
+		/**
+		 * X axis for the bar chart. Represents the parties.
+		 */
+		final CategoryAxis xAxis =new CategoryAxis();
+	    /**
+	     * Y axis for the bar chart. Represents the number of votes of each party.
+	     */
+	    final NumberAxis yAxis = new NumberAxis();
 
 		XYChart.Series <String, Number> barChartSeries = new XYChart.Series<String,Number>();
 		barChartSeries.setName("Mandates");
@@ -61,8 +58,11 @@ public class BarChartCreator implements ChartCreator {
 		for(Entry<String, Integer> entry : map.entrySet()) {
 		    partyName =  entry.getKey();
 		    mandates = entry.getValue();
+
 		    barChartSeries.getData().add(new XYChart.Data<String, Number>(partyName+" - "+mandates,mandates));
 		}
+		xAxis.setLabel("Parties");
+		yAxis.setLabel("Mandates");
 
 		barChart.getData().add(barChartSeries);
 		return barChart;
