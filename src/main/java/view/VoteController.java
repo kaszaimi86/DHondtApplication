@@ -1,10 +1,8 @@
 package view;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
@@ -213,7 +211,7 @@ public class VoteController {
 	        File file = fileChooser.showSaveDialog(main.getPrimaryStage());
 
 	        if (file != null) {
-	            // Make sure it has the correct extension
+
 	            if (!file.getPath().endsWith(".xml")) {
 	                file = new File(file.getPath() + ".xml");
 	            }
@@ -314,40 +312,51 @@ public class VoteController {
 	 */
     private void createCharts(String chartType){
 
-        if (isInputValid()) {
+    	try{
 
-        	resultChart = new PieChart();
-        	infoLogger.info("Valid input");
-			Vote vote = createVote();
-			infoLogger.info("Vote has been created.");
-			infoLogger.info(vote.toString());
-			MandateCalculatorImpl calc = new MandateCalculatorImpl();
-			MandateForVote mandate = calc.calculator(vote);
+	        if (isInputValid()) {
 
-			infoLogger.info("Mandates have been calculated.");
+	        	resultChart = new PieChart();
+	        	infoLogger.info("Valid input");
+				Vote vote = createVote();
+				infoLogger.info("Vote has been created.");
+				infoLogger.info(vote.toString());
+				MandateCalculatorImpl calc = new MandateCalculatorImpl();
+				MandateForVote mandate = calc.calculator(vote);
 
-			HashMap<String, Integer> mandates = mandate.getMandates();
+				infoLogger.info("Mandates have been calculated.");
 
-			if(chartType.equalsIgnoreCase("PIECHART")){
-				ChartCreator pieChartCreator = chartFactory.getChartCreator("PIECHART");
-				resultChart = (PieChart) pieChartCreator.createChart(mandates,vote);
-				infoLogger.info("A piechart has been created.");
+				HashMap<String, Integer> mandates = mandate.getMandates();
+
+				if(chartType.equalsIgnoreCase("PIECHART")){
+					ChartCreator pieChartCreator = chartFactory.getChartCreator("PIECHART");
+					resultChart = (PieChart) pieChartCreator.createChart(mandates,vote);
+					infoLogger.info("A piechart has been created.");
+				}
+
+				if(chartType.equalsIgnoreCase("BARCHART")){
+					ChartCreator barChartCreator = chartFactory.getChartCreator("BARCHART");
+					barChart = (BarChart<String, Number>) barChartCreator.createChart(mandates,vote);
+					infoLogger.info("A bar chart has been created.");
+				}
+
+			}else{
+				resultChart = null;
+				barChart=null;
+
+				errorLogger.error("Cannot create chart.");
+	    		errorLogger.error("Faulty datas.");
+				Alert alert = new Alert(AlertType.ERROR);
+	    		alert.initOwner(main.getPrimaryStage());
+	    		alert.setTitle("Cannot create chart");
+	    		alert.setHeaderText("Faulty datas.");
+	    		alert.setContentText("The application cannot generate a chart from not appropriate datas.");
+	    		alert.showAndWait();
 			}
-
-			if(chartType.equalsIgnoreCase("BARCHART")){
-				ChartCreator barChartCreator = chartFactory.getChartCreator("BARCHART");
-				barChart = (BarChart<String, Number>) barChartCreator.createChart(mandates,vote);
-				infoLogger.info("A bar chart has been created.");
-			}
-
-		}else{
-			resultChart = null; //new PieChart();
-
-//			XYChart.Series <String, Number> barChartSeries = new XYChart.Series<String,Number>();
-//	    	barChart.setData(FXCollections.observableArrayList(barChartSeries));
+    	}catch(Exception e){
+    		resultChart = null;
 			barChart=null;
-
-			errorLogger.error("Cannot create chart.");
+    		errorLogger.error("Cannot create chart.");
     		errorLogger.error("Faulty datas.");
 			Alert alert = new Alert(AlertType.ERROR);
     		alert.initOwner(main.getPrimaryStage());
@@ -355,7 +364,7 @@ public class VoteController {
     		alert.setHeaderText("Faulty datas.");
     		alert.setContentText("The application cannot generate a chart from not appropriate datas.");
     		alert.showAndWait();
-		}
+    	}
     }
 
 	/**

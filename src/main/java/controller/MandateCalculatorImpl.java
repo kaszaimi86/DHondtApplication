@@ -76,6 +76,7 @@ public class MandateCalculatorImpl implements MandateCalculator {
 			forCalculation.put(maxKey,(partyNameAndVotesOriginal.get(maxKey)/(result.get(maxKey)+1)));
 		}
 
+
 		resMandate = new MandateForVote(result);
 		return resMandate;
 	}

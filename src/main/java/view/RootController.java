@@ -21,20 +21,6 @@ public class RootController {
 	private static Logger logger = LoggerFactory.getLogger("info");
 
 
-//    /**
-//     * Reference to the main application.
-//     */
-//    private Main main;
-//
-//    /**
-//     * Is called by the main application to give a reference back to itself.
-//     *
-//     * @param main Reference to main.
-//     */
-//    public void setMainApp(Main main) {
-//        this.main = main;
-//    }
-
     /**
      * Pops up a dialog for the user, so the user can read how to use the application.
      */

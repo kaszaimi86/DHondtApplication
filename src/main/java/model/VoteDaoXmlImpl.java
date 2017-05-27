@@ -9,8 +9,7 @@ import javax.xml.bind.Unmarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//import model.Vote;
-//import org.apache.log4j.Logger;
+
 
 /**
  * Implements the VoteDAO interface.
@@ -75,7 +74,7 @@ public class VoteDaoXmlImpl implements VoteDAO {
 			errorLogger.error("JAXB Error at file read.");
 			errorLogger.error(e.getMessage());
 		}
-		//return vote;
+
 		return null;
 	}
 
