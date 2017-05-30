@@ -177,7 +177,7 @@ public class VoteDataValidatorTest {
 		Boolean result = testValidator.isValid(jala,haba,redSav,moruga,carolina, chipotle,mandates,threshold);
 
 		String actualErrorMessage = testValidator.getErrorMessage();
-		System.out.println(result);
+		
 		assertFalse(result);
 		assertTrue(expectedErrorMessage.equals(actualErrorMessage));
 		logger.debug("getErrorMessage has been succssfully tested.");
@@ -200,7 +200,7 @@ public class VoteDataValidatorTest {
 		Boolean result = testValidator.isValid(jala,haba,redSav,moruga,carolina, chipotle,mandates,threshold);
 
 		String actualErrorMessage = testValidator.getErrorMessage();
-		System.out.println(result);
+		
 		assertFalse(result);
 		assertTrue(expectedErrorMessage.equals(actualErrorMessage));
 		logger.debug("getErrorMessage2 has been succssfully tested.");
@@ -222,7 +222,7 @@ public class VoteDataValidatorTest {
 		Boolean result = testValidator.isValid(jala,haba,redSav,moruga,carolina, chipotle,mandates,threshold);
 
 		String actualErrorMessage = testValidator.getErrorMessage();
-		System.out.println(result);
+		
 		assertTrue(result);
 		assertTrue(actualErrorMessage.length() == 0);
 		logger.debug("getErrorMessageThresholdBelow100 has been succssfully tested.");
@@ -244,7 +244,7 @@ public class VoteDataValidatorTest {
 		Boolean result = testValidator.isValid(jala,haba,redSav,moruga,carolina, chipotle,mandates,threshold);
 
 		String actualErrorMessage = testValidator.getErrorMessage();
-		System.out.println(result);
+		
 		assertFalse(result);
 		assertTrue(expectedErrorMessage.equals(actualErrorMessage));
 		logger.debug("getErrorMessageThresholdIs100 has been succssfully tested.");
@@ -265,7 +265,7 @@ public class VoteDataValidatorTest {
 		Boolean result = testValidator.isValid(jala,haba,redSav,moruga,carolina, chipotle,mandates,threshold);
 
 		String actualErrorMessage = testValidator.getErrorMessage();
-		System.out.println(result);
+		
 		assertFalse(result);
 		assertTrue(expectedErrorMessage.equals(actualErrorMessage));
 		logger.debug("getErrorMessageThresholdIsNOtValid has been succssfully tested.");
